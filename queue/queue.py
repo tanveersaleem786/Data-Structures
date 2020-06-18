@@ -1,3 +1,7 @@
+import sys
+sys.path.append('./singly_linked_list')
+from singly_linked_list import LinkedList
+
 """
 A queue is a data structure whose primary purpose is to store and
 return elements in First In First Out order. 
@@ -13,31 +17,26 @@ return elements in First In First Out order.
 Stretch: What if you could only use instances of your Stack class to implement the Queue?
          What would that look like? How many Stacks would you need? Try it!
 """
-class Queue:
+"""
+Answer for Q3:-
+In this case array and linked list are woring the same way but there are different way to implement queue with array
+"""
+
+class Queue1:
     def __init__(self):
         self.size = 0
         self.storage = []
-        # self.header = None
-        # self.tail = None
+       
     
     def __len__(self):
         return self.size
+        
 
     def enqueue(self, value):  
         #self.storage.insert(0,value)
         self.storage.append(value)
         self.size += 1
-        # if self.header is None and self.tail is None:    
-            
-        #     self.size += 1
-        #     self.header = 0
-        #     self.tail = 0    
-        # else:
-        #     self.storage.append(value)
-        #     self.size += 1            
-        #     self.tail += 1    
 
-    
 
     def dequeue(self):
         if self.size != 0:
@@ -46,11 +45,29 @@ class Queue:
             return self.storage.pop(0)
         else:
             return None
-        # if self.size != 0:
-        #     self.storage.remove(self.storage[self.header])
-        #     self.size -= 1
-        #     self.tail -= 1
-        
+   
+
+# Queue with LinkedList
+class Queue:
+    def __init__(self):
+        self.size = 0
+        self.storage = LinkedList()
+       
+    
+    def __len__(self):
+        return self.size
+
+    def enqueue(self, value):          
+        self.storage.add_to_tail(value)
+        self.size += 1    
+
+    def dequeue(self):
+        if self.size != 0:
+            self.size -= 1           
+            return self.storage.remove_head()
+        else:
+            return None
+   
         
 #qu = Queue()
 #https://runestone.academy/runestone/books/published/pythonds/BasicDS/ImplementingaQueueinPython.html
@@ -63,3 +80,5 @@ class Queue:
 
 # qu.dequeue()
 # print(qu.__len__())
+
+
