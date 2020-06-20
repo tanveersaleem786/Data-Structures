@@ -19,7 +19,7 @@ Answer for Q3:-
 In case of array next element will be append on the right side of the list
 In case of Linked list next element will be add on the left side of list
 """
-class Stack1:
+class Stack:
     def __init__(self):
         self.size = 0
         self.storage = []
@@ -38,7 +38,7 @@ class Stack1:
         else:
             return None
 
-class Stack:
+class Stack1:
     def __init__(self):
         self.size = 0
         self.storage = LinkedList()
