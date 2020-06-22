@@ -47,42 +47,157 @@ class DoublyLinkedList:
     """Wraps the given value in a ListNode and inserts it 
     as the new head of the list. Don't forget to handle 
     the old head node's previous pointer accordingly."""
-    def add_to_head(self, value):
-        pass
+    def add_to_head(self, value):       
+        
+        if self.head is None and self.tail is None:
+            new_node = ListNode(value)
+            self.head = new_node
+            self.tail = new_node
+        else:
+            current_node = self.head
+            current_node.insert_before(value)           
+            self.head = current_node.prev
+        
+        self.length += 1
+
+
 
     """Removes the List's current head node, making the
     current head's next node the new head of the List.
     Returns the value of the removed Node."""
     def remove_from_head(self):
-        pass
+        
+        current_node = self.head
+        if current_node:
+            self.head = current_node.next
+            current_node.delete()
+            self.length -= 1
+
+            if self.head is None:
+                self.tail = None
+
+        return current_node.value if current_node else None
 
     """Wraps the given value in a ListNode and inserts it 
     as the new tail of the list. Don't forget to handle 
     the old tail node's next pointer accordingly."""
-    def add_to_tail(self, value):
-        pass
+    def add_to_tail(self, value):        
+
+        if self.head is None and self.tail is None:
+            new_node = ListNode(value)
+            self.head = new_node
+            self.tail = new_node
+        else:           
+            current_node = self.tail   
+            current_node.insert_after(value)                             
+            self.tail = current_node.next
+            
+        self.length += 1
 
     """Removes the List's current tail node, making the 
     current tail's previous node the new tail of the List.
     Returns the value of the removed Node."""
     def remove_from_tail(self):
-        pass
+        
+        current_node = self.tail
+        if current_node:
+            self.tail = current_node.prev
+            current_node.delete()
+            self.length -= 1
+
+            if self.tail is None:
+                self.head = None
+
+        return current_node.value if current_node else None
 
     """Removes the input node from its current spot in the 
     List and inserts it as the new head node of the List."""
     def move_to_front(self, node):
-        pass
+        if node.next is None:
+            self.tail = node.prev
+        
+        self.delete(node)
+        self.add_to_head(node.value)
+        # node.delete()
+        # node.next = self.head
+        # self.head.prev = node
+        # self.head = node
+
 
     """Removes the input node from its current spot in the 
     List and inserts it as the new tail node of the List."""
     def move_to_end(self, node):
-        pass
+ 
+        if node.prev is None:
+            self.head = node.next
+
+        self.delete(node)        
+        self.add_to_tail(node.value)
+        #node.delete()
+        # node.prev = self.tail
+        # self.tail.next = node
+        # self.tail = node
+
 
     """Removes a node from the list and handles cases where
     the node was the head or the tail"""
     def delete(self, node):
-        pass
+        
+        if node.prev is None:
+            self.head = node.next
+        
+        if node.next is None:
+            self.tail = node.prev
+  
+        node.delete()  
+ 
+        self.length -= 1
         
     """Returns the highest value currently in the list"""
     def get_max(self):
-        pass
+
+        current_node = self.head
+
+        max_val = current_node.value
+        while current_node.next:
+            if max_val < current_node.next.value :
+                max_val = current_node.next.value
+            current_node = current_node.next
+
+        return max_val
+
+
+# example
+# DoublyLinkedList = DoublyLinkedList()
+
+# DoublyLinkedList.add_to_head(1)
+# DoublyLinkedList.add_to_head(0)
+# DoublyLinkedList.add_to_tail(2)
+# DoublyLinkedList.add_to_tail(3)
+# DoublyLinkedList.add_to_tail(4)
+# DoublyLinkedList.remove_from_head()
+# DoublyLinkedList.remove_from_tail()
+# DoublyLinkedList.move_to_end(DoublyLinkedList.head)
+
+#DoublyLinkedList.delete(DoublyLinkedList.head)
+#DoublyLinkedList.delete(DoublyLinkedList.head)
+# current_node  = DoublyLinkedList.head
+# output = ""
+# while current_node is not None:
+#     # check if this is the node we are looking for
+#     output += f'{current_node.value}-->'  
+#     current_node = current_node.next
+# print(output)
+# print(DoublyLinkedList.__len__())
+#print()
+#DoublyLinkedList.add_to_tail(1)
+#print(f'does our LL contain 0? {linked_list.contains(0)}')
+#print(f'does our LL contain 1? {linked_list.contains(1)}')
+#print(f'does our LL contain 2? {linked_list.contains(2)}')
+
+# linked_list.add_to_head(2)
+# print(f'the start of the list is {linked_list.head.value}')
+# linked_list.add_to_head(5)
+# print(f'the start of the list is {linked_list.head.value}')
+# linked_list.remove_head()
+# print(f'the start of the list is {linked_list.head.value}')
