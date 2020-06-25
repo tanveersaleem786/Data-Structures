@@ -90,7 +90,7 @@ class BSTNode:
 
     # Print all the values in order from low to high
     # Hint:  Use a recursive, depth first traversal
-    def in_order_print(self, node):
+    def in_order_print(self, node): # Left-Node-Right LNR
         
         
         if self.left:
@@ -145,20 +145,34 @@ class BSTNode:
     # Note: Research may be required
 
     # Print Pre-order recursive DFT
-    def pre_order_dft(self, node):
-        pass
+    def pre_order_dft(self, node): #  Node-Left-Right NLR
+        
+        print(self.value)
+
+        if self.left:
+            self.left.pre_order_dft(self.left)
+        
+        if self.right:
+            self.right.pre_order_dft(self.right)
 
     # Print Post-order recursive DFT
-    def post_order_dft(self, node):
-        pass
+    def post_order_dft(self, node): # Left-Right-Node LRN
+        
+        if self.left:
+            self.left.post_order_dft(self.left)
+        
+        if self.right:
+            self.right.post_order_dft(self.right)
 
-root_node = BSTNode(8)
-root_node.insert(3)
-root_node.insert(4)
-root_node.insert(2)
-root_node.insert(10)
-root_node.insert(9)
-root_node.insert(12)
+        print(self.value)
+
+# root_node = BSTNode(8)
+# root_node.insert(3)
+# root_node.insert(4)
+# root_node.insert(2)
+# root_node.insert(10)
+# root_node.insert(9)
+# root_node.insert(12)
 
 # # const print_node = (x) => { console.log(x) }
 # print_node = lambda x: print(f'current_node is : {x}')
@@ -166,5 +180,9 @@ root_node.insert(12)
 
 #root_node.bft_print(root_node)
 #root_node.dft_print(root_node)
-root_node.in_order_print(root_node)
+#root_node.in_order_print(root_node)
+#root_node.pre_order_dft(root_node)
+#root_node.post_order_dft(root_node)
+
+
 
